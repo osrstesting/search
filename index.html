@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios de Objetos OSRS</title>
+    <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Precios de Objetos OSRS</h1>
+
+    <div class="filters">
+      <div>
+        <label for="search">Buscar Objeto</label>
+        <input type="text" id="search" placeholder="Buscar objeto..." oninput="filterItems()">
+      </div>
+      <div>
+        <label for="quantity">Cantidad</label>
+        <input type="number" id="quantity" placeholder="Cantidad" max="100" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="minGain">Ganancia Mínima</label>
+        <input type="number" id="minGain" placeholder="Ganancia mínima" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="maxGain">Ganancia Máxima</label>
+        <input type="number" id="maxGain" placeholder="Ganancia máxima" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="minPrice">Precio Bajo Mínimo</label>
+        <input type="number" id="minPrice" placeholder="Precio Bajo Mínimo" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="maxPrice">Precio Bajo Máximo</label>
+        <input type="number" id="maxPrice" placeholder="Precio Bajo Máximo" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="minLimit">Cantidad Mínima de Compra</label>
+        <input type="number" id="minLimit" placeholder="Cantidad mínima de compra" oninput="filterItems()">
+      </div>
+      <div>
+        <label for="maxLimit">Cantidad Máxima de Compra</label>
+        <input type="number" id="maxLimit" placeholder="Cantidad máxima de compra" oninput="filterItems()">
+      </div>
+    </div>
+
+    <div class="sort-buttons">
+      <button id="sortBtn" onclick="toggleSortOrder()">Ordenar por Ganancia: <span id="sortText">Menor a Mayor</span></button>
+      <button class="apply-filters-btn" onclick="applyFilters()">Aplicar Filtros</button>
+      <button class="clear-filters-btn" onclick="clearFilters()">Limpiar Filtros</button>
+    </div>
+
+    <div id="itemsList" class="items-list"></div>
+
+    <div class="pagination">
+      <button id="prevBtn" onclick="changePage(-1)" disabled>Anterior</button>
+      <button id="nextBtn" onclick="changePage(1)">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Modal flotante para mostrar el gráfico expandido -->
+  <div id="chartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="modalClose">&times;</span>
+      <h2 id="modalItemName">Nombre del Ítem</h2>
+      <div class="modal-controls">
+        <button onclick="changeModalTimeInterval('5m')">5m</button>
+        <button onclick="changeModalTimeInterval('1h')">1h</button>
+        <button onclick="changeModalTimeInterval('6h')">6h</button>
+        <button onclick="changeModalTimeInterval('24h')">24h</button>
+      </div>
+      <div class="volume-display">
+        Volumen Diario: <span id="volumeValue">Cargando...</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="modalChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
